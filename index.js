@@ -1,38 +1,46 @@
+var Endpoint=0;
 
-$('h1').on('click',function(){getAll()});
-const Url1 = 'https://restcountries.eu/rest/v2/name/Afghanistan';
+$('#primer').on('click',function(){getAll(url[Endpoint])});
 
-function getAll(){
-  const data={ name:'gio',id:23}
+
+url=[
+  'https://restcountries.eu/rest/v2/name/united',
+  'https://restcountries.eu/rest/v2/name/aruba?fullText:true',
+  'https://restcountries.eu/rest/v2/alpha/col',
+  'https://restcountries.eu/rest/v2/alpha?codes:col;no;ee',
+   'https://restcountries.eu/rest/v2/currency/cop',
+  'https://restcountries.eu/rest/v2/lang/es',
+   'https://restcountries.eu/rest/v2/capital/tallinn',
+   'https://restcountries.eu/rest/v2/callingcode/372',
+   'https://restcountries.eu/rest/v2/region/europe',
+   'https://restcountries.eu/rest/v2/regionalbloc/eu',
+   'https://restcountries.eu/rest/v2/all?fields=name;capital;currencies',
+]
+
+
+
+
+$('select#input').on('change',function(){
+  Endpoint = $(this).val();
+   console.log(Endpoint)
+});
+
+
+function getAll(URL){
 
   $.ajax({
-    url:Url1,
+    url:URL,
     method:"GET",//or POST
     //data:data,//if the type is POST
     //dataType:JSON or HTML, XML,TXT
     success: function(result){
-      console.log(JSON.stringify(result))
+      document.getElementById("consulta").innerHTML =
+      jsonStr=JSON.stringify(result);
     },
     error: function(error){
       console.log(`Error ${error}`)
     }
   })
-  /*
-    $.ajax({
-        method: "GET",
-        url: 'https://restcountries.eu/rest/v2/name/Afghanistan'
-      }).done(function(data) {
-        $('h1').html(JSON.stringify(data)); // imprimimos la respuesta
-      }).fail(function() {
-        alert("Algo salió mal");
-      }).always(function() {
-        alert("Siempre se ejecuta")
-      });*/
-    }
 
 
-    /*
-
-      $('h1').click(function(){})*/
-
-     
+}
